@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RichLog 日志查看器</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 1rem;
+      background-color: #f8f9fa;
+    }
+    .log-container {
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+      padding: 0;
+    }
+    .log-entry {
+      padding: 0.25rem 0.5rem;
+      border-bottom: 1px solid #f0f0f0;
+      font-family: monospace;
+      white-space: nowrap;
+    }
+    .log-entry:hover {
+      background-color: #f8f9fa;
+    }
+    .log-timestamp {
+      color: #6c757d;
+      margin-right: 1rem;
+    }
+    .richlog-link {
+      cursor: pointer;
+      color: #0d6efd;
+      text-decoration: none;
+    }
+    .richlog-link:hover {
+      text-decoration: underline;
+    }
+    .search-container {
+      padding: 0.5rem 1rem;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .match-highlight {
+      background-color: #ffc107;
+    }
+    /* 插件类型样式由插件配置动态生成 */
+  </style>
+  <!-- 动态样式将被插入到这里 -->
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- 侧边栏 -->
+      <div class="col-md-2 sidebar">
+        <h5>RichLog</h5>
+        <hr>
+        <div class="mb-3">
+          <button id="load-log-btn" class="btn btn-primary btn-sm mb-2 w-100">加载日志</button>
+          <!-- 已移除示例数据按钮 -->
+          <button id="clear-log-btn" class="btn btn-outline-secondary btn-sm w-100">清除日志</button>
+        </div>
+        <!-- 移除数据类型筛选器 -->
+        <div class="mb-3">
+          <label class="form-label">统计信息</label>
+          <ul id="stats-list" class="list-group list-group-flush small">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              总日志行数
+              <span id="stats-total" class="badge bg-secondary">0</span>
+            </li>
+            <div id="stats-types-container">
+              <!-- 将由 JavaScript 动态生成 -->
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 主内容区 -->
+      <div class="col-md-10">
+        <!-- 搜索框 -->
+        <div class="search-container sticky-top">
+          <div class="input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="搜索日志...">
+            <button class="btn btn-outline-secondary" type="button" id="search-btn">搜索</button>
+            <button class="btn btn-outline-secondary" type="button" id="clear-search-btn">清除</button>
+          </div>
+        </div>
+        
+        <!-- 日志显示区 -->
+        <div class="log-container" id="log-container">
+          <div class="text-center p-5 text-muted">
+            <p>请加载日志文件或粘贴日志内容</p>
+            <div class="mb-3">
+              <button id="paste-log-btn" class="btn btn-outline-primary">粘贴日志</button>
+            </div>
+            <!-- 已移除示例数据相关元素 -->
+            <div class="mb-3">
+              <label for="log-file-input" class="form-label">或选择日志文件</label>
+              <input class="form-control" type="file" id="log-file-input">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 粘贴日志模态框 -->
+  <div class="modal fade" id="paste-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">粘贴日志内容</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <textarea id="paste-textarea" class="form-control" rows="15"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+          <button type="button" class="btn btn-primary" id="paste-confirm-btn">加载日志</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

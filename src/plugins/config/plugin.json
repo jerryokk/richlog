@@ -1,0 +1,9 @@
+{
+  "type": "config",
+  "name": "配置",
+  "description": "查看和编辑配置文件数据",
+  "color": "success",
+  "mainColor": "#198754",
+  "bgColor": "bg-success",
+  "icon": "gear"
+}

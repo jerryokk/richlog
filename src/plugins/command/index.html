@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RichLog 命令输出查看器</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      padding: 0.5rem;
+      background-color: white;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .command-container {
+      padding: 0.5rem;
+    }
+    pre.command-output {
+      background-color: #282c34;
+      color: #abb2bf;
+      border-radius: 4px;
+      padding: 1rem;
+      font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-bottom: 0;
+      min-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .line-numbers {
+      user-select: none;
+      color: #636d83;
+      text-align: right;
+      padding-right: 0.5rem;
+      margin-right: 0.5rem;
+      border-right: 1px solid #4b5263;
+      display: inline-block;
+      min-width: 40px;
+    }
+    .search-container {
+      padding: 0.5rem;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #dee2e6;
+    }
+    .highlight {
+      background-color: rgba(255, 193, 7, 0.3);
+      color: #fff;
+    }
+    .error-container {
+      padding: 2rem;
+      text-align: center;
+    }
+    .loading-container {
+      padding: 4rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="toolbar">
+      <div class="row align-items-center">
+        <div class="col">
+          <h5 class="mb-0">命令输出查看器</h5>
+        </div>
+        <div class="col-auto">
+          <div class="btn-group">
+            <button id="line-numbers-btn" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-list-ol"></i> 行号
+            </button>
+            <button id="wrap-btn" class="btn btn-sm btn-outline-secondary">
+              <i class="bi bi-text-wrap"></i> 自动换行
+            </button>
+            <button id="download-btn" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-download"></i> 下载
+            </button>
+            <button id="copy-btn" class="btn btn-sm btn-outline-primary">
+              <i class="bi bi-clipboard"></i> 复制
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="search-container">
+      <div class="input-group">
+        <input type="text" id="search-input" class="form-control" placeholder="搜索命令输出...">
+        <button class="btn btn-outline-secondary" type="button" id="search-prev-btn">
+          <i class="bi bi-chevron-up"></i>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" id="search-next-btn">
+          <i class="bi bi-chevron-down"></i>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" id="clear-search-btn">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="mt-1 small text-muted" id="search-stats">未搜索</div>
+    </div>
+    
+    <div id="command-container" class="command-container">
+      <!-- 内容将由 JavaScript 动态生成 -->
+      <div class="loading-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">加载中...</span>
+        </div>
+        <p class="mt-2">正在加载命令输出...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

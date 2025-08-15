@@ -1,0 +1,9 @@
+{
+  "type": "image",
+  "name": "图片",
+  "description": "查看和处理图片数据",
+  "color": "danger",
+  "mainColor": "#dc3545",
+  "bgColor": "bg-danger",
+  "icon": "image"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "command",
+  "name": "命令",
+  "description": "查看和执行命令行数据",
+  "color": "info",
+  "mainColor": "#0dcaf0",
+  "bgColor": "bg-info",
+  "icon": "terminal"
+}

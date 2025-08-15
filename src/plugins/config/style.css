@@ -1,0 +1,23 @@
+#config-container {
+  max-width: 100%;
+  overflow: auto;
+}
+
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 1rem;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  margin-bottom: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.json-string { color: #d63384; }
+.json-number { color: #0d6efd; }
+.json-boolean { color: #fd7e14; }
+.json-null { color: #6c757d; }
+.json-key { color: #198754; font-weight: bold; }

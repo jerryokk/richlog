@@ -1,0 +1,128 @@
+/**
+ * RichLog Web 界面样式
+ */
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 日志行样式增强 */
+.log-entry {
+  transition: background-color 0.15s ease;
+  font-size: 0.9rem;
+}
+
+.log-entry:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.log-entry:hover {
+  background-color: #e9ecef;
+}
+
+/* 富媒体链接样式 */
+.richlog-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.richlog-link:hover {
+  background-color: #e9ecef;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transform: translateY(-1px);
+  color: #004499;
+}
+
+/* 类型颜色 - 基础样式 */
+.richlog-link[class*="type-"] {
+  border-left: 3px solid #6c757d; /* 默认边框颜色 */
+}
+
+/* 悬停提示 */
+[data-tooltip] {
+  position: relative;
+}
+
+[data-tooltip]:after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  background-color: rgba(0,0,0,0.8);
+  color: white;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+[data-tooltip]:hover:after {
+  opacity: 1;
+}
+
+/* 响应式布局增强 */
+@media (max-width: 768px) {
+  .sidebar {
+    height: auto;
+    position: relative;
+  }
+  
+  .log-container {
+    height: 70vh;
+  }
+  
+  .richlog-link {
+    display: inline-block;
+    margin-top: 4px;
+    width: 100%;
+  }
+}
+
+/* 打印优化 */
+@media print {
+  .sidebar, .search-container {
+    display: none !important;
+  }
+  
+  .log-container {
+    height: auto;
+    overflow: visible;
+  }
+  
+  .col-md-10 {
+    width: 100%;
+  }
+  
+  .log-entry {
+    border-bottom: 1px solid #ddd;
+    page-break-inside: avoid;
+  }
+}
