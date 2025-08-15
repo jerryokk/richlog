@@ -2,7 +2,7 @@
  * RichLog 配置查看器插件
  */
 
-const { PluginBase, PluginUtils } = require('../index');
+const { PluginBase } = require('../index');
 import './style.css';
 
 class ConfigPlugin extends PluginBase {
