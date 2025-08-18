@@ -189,7 +189,8 @@ npm run dev
 npm run build
 
 # 生成测试日志
-cd test && node generate-log.js
+cd test/js && node generate-log.js
+cd test/cpp && make generate-log
 ```
 
 ### 技术栈
@@ -205,8 +206,13 @@ cd test && node generate-log.js
 ### 生成测试数据
 
 ```bash
-cd test
+cd test/js
 node generate-log.js
+```
+
+```bash
+cd test/cpp
+make generate-log
 ```
 
 这会生成包含各种富媒体数据的示例日志文件。
